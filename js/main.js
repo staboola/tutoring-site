@@ -108,16 +108,4 @@
     }, { threshold: 0.4 });
     statObs.observe(statWrap);
   }
-
-  /* ---------- Pointer-reactive spotlight on cards ---------- */
-  if (!reduce && window.matchMedia("(hover: hover)").matches) {
-    var surfaces = document.querySelectorAll(".card, .step, .result-card, .review-card, .profile-card");
-    surfaces.forEach(function (c) {
-      c.addEventListener("mousemove", function (e) {
-        var r = c.getBoundingClientRect();
-        c.style.setProperty("--mx", ((e.clientX - r.left) / r.width * 100) + "%");
-        c.style.setProperty("--my", ((e.clientY - r.top) / r.height * 100) + "%");
-      });
-    });
-  }
 })();
