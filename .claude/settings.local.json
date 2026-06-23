@@ -3,7 +3,9 @@
     "allow": [
       "Bash(py --version)",
       "Bash(npx --version)",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(git push *)",
+      "Read(//tmp/**)"
     ]
   }
 }
