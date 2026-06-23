@@ -108,4 +108,41 @@
     }, { threshold: 0.4 });
     statObs.observe(statWrap);
   }
+
+  /* ---------- Contact form: AJAX submit with graceful fallback ---------- */
+  // The submit event only fires once the browser's native validation passes.
+  // Without fetch we leave the default POST to FormSubmit in place.
+  var contactForm = document.getElementById("contactForm");
+  if (contactForm && window.fetch) {
+    var statusEl = contactForm.querySelector(".form-status");
+    var submitBtn = contactForm.querySelector('button[type="submit"]');
+    var setStatus = function (type, msg) {
+      if (!statusEl) return;
+      statusEl.textContent = msg;
+      statusEl.className = "form-status" + (type ? " form-status--" + type : "");
+    };
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var ajaxUrl = contactForm.action.replace("formsubmit.co/", "formsubmit.co/ajax/");
+      var defaultLabel = submitBtn ? submitBtn.textContent : "";
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Sending…"; }
+      setStatus("", "");
+      var restore = function () {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = defaultLabel; }
+      };
+      fetch(ajaxUrl, {
+        method: "POST",
+        headers: { "Accept": "application/json" },
+        body: new FormData(contactForm)
+      }).then(function (res) {
+        if (!res.ok) throw new Error("Request failed");
+        contactForm.reset();
+        setStatus("success", "Thanks — your message is on its way. I'll usually reply within a day.");
+        restore();
+      }).catch(function () {
+        setStatus("error", "Sorry, something went wrong. Please email or message me on WhatsApp instead.");
+        restore();
+      });
+    });
+  }
 })();
