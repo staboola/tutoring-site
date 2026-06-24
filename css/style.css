@@ -64,12 +64,9 @@ section[id] { scroll-margin-top: 84px; }
 }
 .nav.scrolled { background: rgba(255, 255, 255, 0.93); box-shadow: 0 6px 24px rgba(20, 23, 26, .07); }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-.brand { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; }
-.brand-mark {
-  display: grid; place-items: center;
-  width: 28px; height: 28px; border-radius: 9px;
-  background: var(--grad); color: #fff; font-size: 0.85rem;
-}
+.brand { display: inline-flex; align-items: center; gap: 0.55rem; }
+.brand-logo { width: 30px; height: 28px; color: var(--ink); flex: none; }
+.brand-name { font-family: var(--font-sans); font-weight: 700; font-size: 1.18rem; letter-spacing: -0.01em; color: var(--ink); }
 .nav-links { display: flex; align-items: center; gap: 0.3rem; }
 .nav-links a { position: relative; padding: 0.5rem 0.85rem; border-radius: 10px; color: var(--muted); font-weight: 600; font-size: 0.95rem; transition: color .25s var(--ease); }
 .nav-links a:hover { color: var(--text); }
@@ -155,6 +152,43 @@ section[id] { scroll-margin-top: 84px; }
 .card p { margin: 0; }
 .price { margin-top: 1.2rem; font-family: var(--font-sans); font-size: 1.7rem; font-weight: 800; color: var(--text); }
 .price span { font-size: 0.95rem; font-weight: 600; color: var(--muted); }
+
+/* ---------- Card as link (homepage subjects) ---------- */
+a.card { display: block; color: inherit; }
+.card-more { display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 1rem; font-weight: 700; font-size: 0.9rem; color: var(--accent); }
+.card-more .arrow { transition: transform .3s var(--ease); }
+a.card:hover .card-more .arrow { transform: translateX(3px); }
+
+/* ---------- Breadcrumb (subject pages) ---------- */
+.crumbs { font-size: 0.85rem; font-weight: 600; color: var(--muted); margin-bottom: 1.1rem; }
+.crumbs a { color: var(--accent); }
+.crumbs a:hover { text-decoration: underline; }
+.crumbs span { margin: 0 0.4rem; color: var(--border-strong); }
+
+/* ---------- What's covered (subject pages) ---------- */
+.topic-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(248px, 1fr)); }
+.topic-list { list-style: none; margin: 0.4rem 0 0; display: grid; gap: 0.55rem; }
+.topic-list li { position: relative; padding-left: 1.7rem; color: var(--text); font-weight: 500; font-size: 0.97rem; }
+.topic-list li::before {
+  content: "✓"; position: absolute; left: 0; top: 0.05rem;
+  width: 1.25rem; height: 1.25rem; display: grid; place-items: center;
+  border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-size: 0.72rem; font-weight: 700;
+}
+
+/* ---------- Price band (subject pages) ---------- */
+.price-band {
+  margin-top: 1.6rem; display: grid; gap: 1.1rem;
+  background: linear-gradient(135deg, var(--accent-soft), rgba(31, 66, 135, .03));
+  border: 1px solid rgba(31, 66, 135, .18); border-radius: var(--radius); padding: 1.5rem;
+}
+.price-band-label { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; color: var(--text); }
+.price-band-note { margin: 0.3rem 0 0; }
+.price-band-right { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
+.price-band .price { margin: 0; }
+@media (min-width: 700px) {
+  .price-band { grid-template-columns: 1fr auto; align-items: center; }
+  .price-band-right { justify-content: flex-end; }
+}
 
 /* ---------- Hover lift for interactive surfaces ---------- */
 .step, .result-card, .review-card, .profile-card { transition: transform .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease); }
@@ -281,6 +315,16 @@ section[id] { scroll-margin-top: 84px; }
 .footer { border-top: 1px solid var(--border); padding: 2rem 0; }
 .footer-inner { display: flex; flex-direction: column; gap: 0.8rem; align-items: center; text-align: center; }
 .footer p { font-size: 0.9rem; }
+
+/* Full brand lockup (footer): graph mark + divider + wordmark + tagline */
+.logo { display: inline-flex; align-items: center; gap: 0.85rem; transition: opacity .25s var(--ease); }
+.logo:hover { opacity: 0.82; }
+.logo-mark { width: 46px; height: 43px; color: var(--ink); flex: none; }
+.logo-axis { fill: var(--muted); font-family: var(--font-display); font-style: italic; }
+.logo-rule { align-self: stretch; width: 1px; background: var(--border-strong); }
+.logo-text { display: flex; flex-direction: column; gap: 0.22rem; line-height: 1; text-align: left; }
+.logo-name { font-family: var(--font-sans); font-weight: 700; font-size: 1.45rem; letter-spacing: -0.01em; color: var(--ink); }
+.logo-tag { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
 
 /* ---------- Sticky mobile CTA (shown only on small screens via media query) ---------- */
 .mobile-cta { display: none; }
