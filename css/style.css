@@ -520,3 +520,5 @@ a.card:hover .card-icon { transform: rotate(-6deg) scale(1.08); }
 .guides-more { text-align: center; margin-top: 1.6rem; }
 .guide-note { margin-top: 1.6rem; }
 .callout a { color: var(--accent); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+.article-related { margin: 2.4rem 0 0; padding-top: 1.4rem; border-top: 1px solid var(--border); font-size: 0.96rem; color: var(--muted); }
+.article-related strong { color: var(--text); }
