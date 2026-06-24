@@ -282,6 +282,9 @@ section[id] { scroll-margin-top: 84px; }
 .footer-inner { display: flex; flex-direction: column; gap: 0.8rem; align-items: center; text-align: center; }
 .footer p { font-size: 0.9rem; }
 
+/* ---------- Sticky mobile CTA (shown only on small screens via media query) ---------- */
+.mobile-cta { display: none; }
+
 /* ---------- Reveal on scroll ---------- */
 .js .reveal {
   opacity: 0; transform: translateY(26px);
@@ -330,4 +333,23 @@ section[id] { scroll-margin-top: 84px; }
   .nav-links.open { transform: translateY(0); }
   .nav-links a { padding: 0.9rem 1rem; font-size: 1.05rem; }
   .nav-cta { text-align: center; margin-top: 0.5rem; }
+
+  .mobile-cta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 60;
+    padding: 0.7rem 0.9rem calc(0.7rem + env(safe-area-inset-bottom, 0px));
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(14px);
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -8px 28px rgba(20, 23, 26, .10);
+    transform: translateY(130%);
+    transition: transform .35s var(--ease);
+  }
+  .mobile-cta.show { transform: translateY(0); }
+  .mobile-cta .btn { padding: 0.8rem 0.6rem; font-size: 0.95rem; box-shadow: none; }
+  .mobile-cta .btn-primary:hover, .mobile-cta .btn-whatsapp:hover { transform: none; }
 }

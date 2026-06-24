@@ -3,6 +3,29 @@
 
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---------- Google Ads conversion tracking ----------
+     These let you see which keywords/ads actually turn into enquiries.
+     In Google Ads: Goals > Conversions > + New conversion action > Website.
+     Create one action for the enquiry form and one for the WhatsApp click,
+     then paste each "Send to" value ("AW-18264377431/xxxxxxxx") below.
+     Until a real label replaces the placeholder, that event is skipped, so
+     no junk data is sent while you're setting it up. */
+  var CONVERSIONS = {
+    enquiry: "AW-18264377431/REPLACE_WITH_FORM_LABEL",
+    whatsapp: "AW-18264377431/REPLACE_WITH_WHATSAPP_LABEL"
+  };
+  function trackConversion(key) {
+    var sendTo = CONVERSIONS[key];
+    if (!sendTo || sendTo.indexOf("REPLACE_WITH_") !== -1) return;
+    if (typeof window.gtag !== "function") return;
+    window.gtag("event", "conversion", { send_to: sendTo });
+  }
+
+  /* Count every WhatsApp click (contact section + sticky bar) as a lead. */
+  document.querySelectorAll(".btn-whatsapp").forEach(function (el) {
+    el.addEventListener("click", function () { trackConversion("whatsapp"); });
+  });
+
   /* ---------- Footer year ---------- */
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -137,6 +160,7 @@
       }).then(function (res) {
         if (!res.ok) throw new Error("Request failed");
         contactForm.reset();
+        trackConversion("enquiry");
         setStatus("success", "Thanks — your message is on its way. I'll usually reply within a day.");
         restore();
       }).catch(function () {
@@ -144,5 +168,24 @@
         restore();
       });
     });
+  }
+
+  /* ---------- Sticky mobile CTA: appear after the hero, hide over the contact form ---------- */
+  var mobileCta = document.getElementById("mobileCta");
+  if (mobileCta) {
+    var heroEl = document.querySelector(".hero");
+    var contactEl = document.getElementById("contact");
+    var syncCta = function () {
+      var pastHero = window.scrollY > (heroEl ? heroEl.offsetHeight - 140 : 420);
+      var contactInView = false;
+      if (contactEl) {
+        var r = contactEl.getBoundingClientRect();
+        contactInView = r.top < window.innerHeight * 0.9 && r.bottom > 0;
+      }
+      mobileCta.classList.toggle("show", pastHero && !contactInView);
+    };
+    window.addEventListener("scroll", syncCta, { passive: true });
+    window.addEventListener("resize", syncCta);
+    syncCta();
   }
 })();
