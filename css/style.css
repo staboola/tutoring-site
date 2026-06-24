@@ -465,7 +465,7 @@ a.card:hover .card-icon { transform: rotate(-6deg) scale(1.08); }
   background: var(--accent-soft); border: 1px solid rgba(31, 66, 135, .2);
   padding: 0.28rem 0.65rem; border-radius: 999px;
 }
-.guide-card h2 { font-size: 1.4rem; margin: 0.9rem 0 0.5rem; }
+.guide-card h2, .guide-card h3 { font-size: 1.4rem; margin: 0.9rem 0 0.5rem; }
 .guide-card p { margin: 0; }
 .guide-card .card-more { margin-top: 1rem; }
 .guide-card:hover .card-more .arrow { transform: translateX(3px); }
@@ -515,3 +515,8 @@ a.card:hover .card-icon { transform: rotate(-6deg) scale(1.08); }
 .guide-cta h2 { margin-bottom: 0.5rem; }
 .guide-cta p { margin: 0 auto 1.4rem; max-width: 34rem; }
 .guide-cta .hero-actions { margin-top: 0; }
+
+/* Internal-linking helpers */
+.guides-more { text-align: center; margin-top: 1.6rem; }
+.guide-note { margin-top: 1.6rem; }
+.callout a { color: var(--accent); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
