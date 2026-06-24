@@ -15,7 +15,7 @@
     gtag('config', 'AW-18264377431');
   </script>
 
-  <title>Online Maths &amp; Physics Tutor · GCSE &amp; A-Level | SamTutors</title>
+  <title>Online Maths &amp; Physics Tutor · GCSE &amp; A-Level | Samuel Maths</title>
   <meta name="description" content="Online one-to-one A-Level &amp; GCSE Maths and Physics tutoring from a Russell Group engineering student. First session free. Now taking on new students for September." />
   <link rel="canonical" href="https://samuelmaths.co.uk/" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -23,19 +23,19 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="SamTutors" />
+  <meta property="og:site_name" content="Samuel Maths" />
   <meta property="og:locale" content="en_GB" />
   <meta property="og:url" content="https://samuelmaths.co.uk/" />
-  <meta property="og:title" content="Online Maths &amp; Physics Tutor · GCSE &amp; A-Level | SamTutors" />
+  <meta property="og:title" content="Online Maths &amp; Physics Tutor · GCSE &amp; A-Level | Samuel Maths" />
   <meta property="og:description" content="Online one-to-one A-Level &amp; GCSE Maths and Physics tutoring from a Russell Group engineering student. The first session is free." />
   <meta property="og:image" content="https://samuelmaths.co.uk/assets/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="SamTutors: maths &amp; physics tutoring that clicks" />
+  <meta property="og:image:alt" content="Samuel Maths: maths &amp; physics tutoring that clicks" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Online Maths &amp; Physics Tutor · GCSE &amp; A-Level | SamTutors" />
+  <meta name="twitter:title" content="Online Maths &amp; Physics Tutor · GCSE &amp; A-Level | Samuel Maths" />
   <meta name="twitter:description" content="Online one-to-one A-Level &amp; GCSE Maths and Physics tutoring from a Russell Group engineering student. The first session is free." />
   <meta name="twitter:image" content="https://samuelmaths.co.uk/assets/og-image.png" />
 
@@ -57,7 +57,7 @@
       {
         "@type": ["EducationalOrganization", "ProfessionalService"],
         "@id": "https://samuelmaths.co.uk/#business",
-        "name": "SamTutors",
+        "name": "Samuel Maths",
         "description": "Online one-to-one A-Level and GCSE Maths and Physics tutoring from a Russell Group engineering student.",
         "url": "https://samuelmaths.co.uk/",
         "image": "https://samuelmaths.co.uk/assets/og-image.png",
@@ -191,6 +191,10 @@
           <a href="#contact" class="btn btn-primary">Book a free first session</a>
           <a href="#subjects" class="btn btn-ghost">View subjects &amp; pricing</a>
         </div>
+        <figure class="hero-portrait reveal">
+          <img src="assets/sam.jpg" alt="Samuel, your maths and physics tutor" width="108" height="108" decoding="async" fetchpriority="high" />
+          <figcaption class="hero-portrait-cap">Hi, I'm <strong>Samuel</strong> — your tutor</figcaption>
+        </figure>
         <div class="stats reveal">
           <div class="stat"><strong>A*</strong><span>in A-Level Maths</span></div>
           <div class="stat"><strong>D&nbsp;&rarr;&nbsp;A</strong><span>grade jump in a year</span></div>
@@ -402,11 +406,15 @@
                 </svg>
                 Message me on WhatsApp
               </a>
+              <a class="btn btn-call btn-block" href="tel:+447826204132">
+                <svg class="call-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                Call 07826 204132
+              </a>
               <a class="contact-email" href="mailto:samuelnoeltaboola@icloud.com">samuelnoeltaboola@icloud.com</a>
             </div>
           </div>
           <form class="contact-form" id="contactForm" action="https://formsubmit.co/samuelnoeltaboola@icloud.com" method="POST">
-            <input type="hidden" name="_subject" value="New tutoring enquiry — SamTutors website" />
+            <input type="hidden" name="_subject" value="New tutoring enquiry — Samuel Maths website" />
             <input type="hidden" name="_template" value="table" />
             <input type="hidden" name="_captcha" value="false" />
             <input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
@@ -425,14 +433,29 @@
               </div>
             </div>
             <div class="field">
-              <label for="cf-subject">Which subject?</label>
-              <select id="cf-subject" name="subject">
-                <option>A-Level Mathematics</option>
-                <option>A-Level Further Mathematics</option>
-                <option>GCSE Maths</option>
-                <option>GCSE Physics</option>
-                <option>Not sure yet</option>
-              </select>
+              <span class="field-label" id="cf-subject-label">Which subject?</span>
+              <div class="subject-picker" role="radiogroup" aria-labelledby="cf-subject-label">
+                <label class="subject-chip">
+                  <input type="radio" name="subject" value="A-Level Mathematics" checked />
+                  <span class="subject-chip-face">A-Level Maths</span>
+                </label>
+                <label class="subject-chip">
+                  <input type="radio" name="subject" value="A-Level Further Mathematics" />
+                  <span class="subject-chip-face">A-Level Further Maths</span>
+                </label>
+                <label class="subject-chip">
+                  <input type="radio" name="subject" value="GCSE Maths" />
+                  <span class="subject-chip-face">GCSE Maths</span>
+                </label>
+                <label class="subject-chip">
+                  <input type="radio" name="subject" value="GCSE Physics" />
+                  <span class="subject-chip-face">GCSE Physics</span>
+                </label>
+                <label class="subject-chip">
+                  <input type="radio" name="subject" value="Not sure yet" />
+                  <span class="subject-chip-face">Not sure yet</span>
+                </label>
+              </div>
             </div>
             <div class="field">
               <label for="cf-message">Message <span class="opt">(optional)</span></label>
@@ -455,7 +478,10 @@
       </svg>
       WhatsApp
     </a>
-    <a class="btn btn-primary" href="#contact">Book free session</a>
+    <a class="btn btn-call" href="tel:+447826204132">
+      <svg class="call-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Call
+    </a>
   </div>
 
   <footer class="footer">
