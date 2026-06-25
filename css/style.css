@@ -131,17 +131,38 @@ section[id] { scroll-margin-top: 84px; }
 .stat strong { font-family: var(--font-sans); font-size: 1.8rem; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--text); }
 .stat span { color: var(--muted); font-size: 0.9rem; }
 
-/* ---------- Hero portrait (face below the CTA) ---------- */
-.hero-portrait { margin: 2rem auto 0; display: flex; flex-direction: column; align-items: center; gap: 0.7rem; }
-.hero-portrait img {
-  width: 108px; height: 108px; border-radius: 50%; object-fit: cover; object-position: 50% 22%;
+/* ---------- Hero portrait (framed; right column on desktop) ---------- */
+.hero-figure { margin: 2rem auto 0; display: flex; flex-direction: column; align-items: center; gap: 0.7rem; }
+.hero-figure img {
+  width: min(180px, 58vw); height: auto; aspect-ratio: 360 / 425;
+  border-radius: 20px; object-fit: cover; object-position: 50% 22%;
   background: var(--surface-2); border: 4px solid var(--surface);
   box-shadow: 0 0 0 1px var(--border), 0 16px 34px rgba(20, 23, 26, .18);
   transition: transform .5s var(--ease), box-shadow .5s var(--ease);
 }
-.hero-portrait img:hover { transform: scale(1.05) translateY(-3px); box-shadow: 0 0 0 1px rgba(31, 66, 135, .35), 0 22px 46px rgba(31, 66, 135, .22); }
+.hero-figure img:hover { transform: scale(1.03) translateY(-3px); box-shadow: 0 0 0 1px rgba(31, 66, 135, .35), 0 22px 46px rgba(31, 66, 135, .22); }
 .hero-portrait-cap { font-size: 0.92rem; font-weight: 600; color: var(--muted); }
 .hero-portrait-cap strong { color: var(--text); font-weight: 700; }
+
+/* ---------- Hero social proof (one-liner) ---------- */
+.hero-proof { display: flex; flex-direction: column; gap: 0.15rem; max-width: 30rem; margin: 1.4rem auto 0; }
+.hero-proof-quote { font-family: var(--font-display); font-style: italic; color: var(--text); font-size: 1rem; line-height: 1.45; }
+.hero-proof-by { font-size: 0.82rem; font-weight: 600; color: var(--muted); }
+
+/* ---------- Two-column "human" hero (homepage only, desktop) ---------- */
+@media (min-width: 900px) {
+  .hero-home .hero-inner {
+    display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem;
+    align-items: center; text-align: left;
+  }
+  .hero-home .hero-copy { text-align: left; }
+  .hero-home .lead { margin-left: 0; margin-right: 0; }
+  .hero-home .hero-actions { justify-content: flex-start; max-width: none; margin: 0; }
+  .hero-home .hero-proof { margin-left: 0; margin-right: 0; }
+  .hero-home .stats { justify-content: flex-start; }
+  .hero-home .hero-figure { margin: 0; }
+  .hero-home .hero-figure img { width: 290px; }
+}
 
 /* ---------- Availability signal ---------- */
 .availability {
@@ -174,8 +195,14 @@ section[id] { scroll-margin-top: 84px; }
 
 /* ---------- Trust bar ---------- */
 .trust-bar { background: var(--bg-soft); border-bottom: 1px solid var(--border); }
-.trust-inner { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.6rem; padding: 0.9rem 1.25rem; }
-.trust-item { color: var(--muted); font-weight: 600; font-size: 0.92rem; }
+.trust-inner { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.6rem 0.7rem; padding: 1rem 1.25rem; }
+.trust-item {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  color: var(--text); font-weight: 600; font-size: 0.9rem;
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 0.4rem 0.85rem; border-radius: 999px;
+  box-shadow: 0 1px 2px rgba(20, 23, 26, .04);
+}
 
 /* ---------- Sections ---------- */
 .section { padding: clamp(3.5rem, 10vw, 6rem) 0; }
@@ -404,11 +431,11 @@ a.card:hover .card-icon { transform: rotate(-6deg) scale(1.08); }
 
 /* ---------- Reveal on scroll ---------- */
 .js .reveal {
-  opacity: 0; transform: translateY(24px); filter: blur(8px);
-  transition: opacity .85s var(--ease), transform .85s var(--ease), filter .85s var(--ease);
-  transition-delay: var(--rd, 0ms); will-change: opacity, transform, filter;
+  opacity: 0; transform: translateY(12px);
+  transition: opacity .5s var(--ease), transform .5s var(--ease);
+  transition-delay: var(--rd, 0ms); will-change: opacity, transform;
 }
-.js .reveal.in { opacity: 1; transform: none; filter: blur(0); }
+.js .reveal.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .js .reveal, .reveal { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
   .availability .dot { animation: none !important; }

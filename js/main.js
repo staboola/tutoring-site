@@ -75,7 +75,7 @@
       return c.classList && c.classList.contains("reveal");
     });
     var idx = group.indexOf(el);
-    el.style.setProperty("--rd", Math.min(idx, 6) * 90 + "ms");
+    el.style.setProperty("--rd", Math.min(idx, 5) * 60 + "ms");
   });
   if ("IntersectionObserver" in window && !reduce) {
     var io = new IntersectionObserver(function (entries) {
