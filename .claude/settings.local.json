@@ -5,7 +5,9 @@
       "Bash(npx --version)",
       "mcp__Claude_Preview__preview_start",
       "Bash(git push *)",
-      "Read(//tmp/**)"
+      "Read(//tmp/**)",
+      "Bash(node -e ' *)",
+      "Bash(node --check js/main.js)"
     ]
   }
 }

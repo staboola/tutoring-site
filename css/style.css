@@ -428,16 +428,14 @@ a.card:hover .card-icon { transform: rotate(-6deg) scale(1.08); }
     left: 0; right: 0; bottom: 0;
     z-index: 60;
     padding: 0.7rem 0.9rem calc(0.7rem + env(safe-area-inset-bottom, 0px));
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(14px);
-    border-top: 1px solid var(--border);
-    box-shadow: 0 -8px 28px rgba(20, 23, 26, .10);
+    background: transparent;
     transform: translateY(130%);
     transition: transform .35s var(--ease);
+    pointer-events: none;
   }
   .mobile-cta.show { transform: translateY(0); }
-  .mobile-cta .btn { padding: 0.8rem 0.5rem; font-size: 0.92rem; box-shadow: none; }
-  .mobile-cta .btn-call:hover, .mobile-cta .btn-whatsapp:hover { transform: none; box-shadow: none; }
+  .mobile-cta .btn { padding: 0.8rem 0.5rem; font-size: 0.92rem; pointer-events: auto; box-shadow: 0 6px 20px rgba(20, 23, 26, .28); }
+  .mobile-cta .btn-call:hover, .mobile-cta .btn-whatsapp:hover { transform: none; box-shadow: 0 6px 20px rgba(20, 23, 26, .28); }
 }
 
 /* ============================================================

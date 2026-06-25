@@ -3,27 +3,34 @@
 
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- Google Ads conversion tracking ----------
-     These let you see which keywords/ads actually turn into enquiries.
-     In Google Ads: Goals > Conversions > + New conversion action > Website.
-     Create one action for the enquiry form and one for the WhatsApp click,
-     then paste each "Send to" value ("AW-18264377431/xxxxxxxx") below.
-     Until a real label replaces the placeholder, that event is skipped, so
-     no junk data is sent while you're setting it up. */
-  var CONVERSIONS = {
+  /* ---------- Lead tracking (GA4 + Google Ads) ----------
+     Every enquiry fires two destinations:
+
+     1. GA4 (G-BSKJWE0SD5) — a "generate_lead" event sends straight away with
+        no setup. In GA4, mark "generate_lead" as a key event
+        (Admin > Events) so it counts as a conversion.
+     2. Google Ads (AW-18264377431) — needed so Ads can optimise bidding.
+        Create two conversion actions (Goals > Conversions > New > Website),
+        then paste each "Send to" value ("AW-18264377431/xxxxxxxx") below.
+        Until a real label replaces the placeholder only the GA4 event fires,
+        so no junk Ads data is sent while you're setting it up. */
+  var GA4_ID = "G-BSKJWE0SD5";
+  var ADS_CONVERSIONS = {
     enquiry: "AW-18264377431/REPLACE_WITH_FORM_LABEL",
     whatsapp: "AW-18264377431/REPLACE_WITH_WHATSAPP_LABEL"
   };
-  function trackConversion(key) {
-    var sendTo = CONVERSIONS[key];
-    if (!sendTo || sendTo.indexOf("REPLACE_WITH_") !== -1) return;
+  function trackLead(method, adsKey) {
     if (typeof window.gtag !== "function") return;
-    window.gtag("event", "conversion", { send_to: sendTo });
+    window.gtag("event", "generate_lead", { method: method, send_to: GA4_ID });
+    var sendTo = ADS_CONVERSIONS[adsKey];
+    if (sendTo && sendTo.indexOf("REPLACE_WITH_") === -1) {
+      window.gtag("event", "conversion", { send_to: sendTo });
+    }
   }
 
   /* Count every WhatsApp click (contact section + sticky bar) as a lead. */
   document.querySelectorAll(".btn-whatsapp").forEach(function (el) {
-    el.addEventListener("click", function () { trackConversion("whatsapp"); });
+    el.addEventListener("click", function () { trackLead("whatsapp", "whatsapp"); });
   });
 
   /* ---------- Footer year ---------- */
@@ -160,7 +167,7 @@
       }).then(function (res) {
         if (!res.ok) throw new Error("Request failed");
         contactForm.reset();
-        trackConversion("enquiry");
+        trackLead("contact_form", "enquiry");
         setStatus("success", "Thanks — your message is on its way. I'll usually reply within a day.");
         restore();
       }).catch(function () {
