@@ -1,6 +1,37 @@
 /* ============================================================
    Samuel Maths - refined black & white with a single accent
    ============================================================ */
+@font-face {
+  font-family: "Lora";
+  font-style: normal;
+  font-weight: 600 700;
+  font-display: swap;
+  src: url("../assets/fonts/lora.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../assets/fonts/plus-jakarta-sans.woff2") format("woff2");
+}
+/* Metrics tuned to the local fallback so the swap to the web font is shift-free (CLS). */
+@font-face {
+  font-family: "Lora Fallback";
+  src: local("Georgia");
+  size-adjust: 109.24%;
+  ascent-override: 92.09%;
+  descent-override: 25.08%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans Fallback";
+  src: local("Arial");
+  size-adjust: 105.08%;
+  ascent-override: 98.78%;
+  descent-override: 21.13%;
+  line-gap-override: 0%;
+}
 :root {
   --bg: #ffffff;
   --bg-soft: #f5f5f2;
@@ -18,8 +49,8 @@
   --radius: 16px;
   --radius-sm: 12px;
   --max: 1120px;
-  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-display: "Lora", Georgia, "Times New Roman", serif;
+  --font-sans: "Plus Jakarta Sans", "Plus Jakarta Sans Fallback", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Lora", "Lora Fallback", Georgia, "Times New Roman", serif;
   --grad: linear-gradient(135deg, var(--accent), var(--accent-dark));
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);

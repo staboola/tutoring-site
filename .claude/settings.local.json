@@ -7,7 +7,10 @@
       "Bash(git push *)",
       "Read(//tmp/**)",
       "Bash(node -e ' *)",
-      "Bash(node --check js/main.js)"
+      "Bash(node --check js/main.js)",
+      "Bash(python \"C:\\\\Users\\\\tendo\\\\AppData\\\\Local\\\\Temp\\\\font_metrics.py\")",
+      "Bash(mv -f lora-700.woff2 lora.woff2)",
+      "Bash(mv -f plus-jakarta-sans-400.woff2 plus-jakarta-sans.woff2)"
     ]
   }
 }

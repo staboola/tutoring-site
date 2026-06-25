@@ -6,6 +6,7 @@
   <script>document.documentElement.classList.add("js");</script>
 
   <!-- Google tag (gtag.js) -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18264377431"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -46,11 +47,8 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" /></noscript>
-  <link rel="stylesheet" href="css/style.css?v=20260625" />
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/lora.woff2" crossorigin />
+  <link rel="stylesheet" href="css/style.css?v=20260625b" />
 
   <script type="application/ld+json">
   {
@@ -207,7 +205,7 @@
           <a href="#subjects" class="btn btn-ghost">View subjects &amp; pricing</a>
         </div>
         <figure class="hero-portrait reveal">
-          <img src="assets/sam.jpg" alt="Samuel, your maths and physics tutor" width="108" height="108" decoding="async" fetchpriority="high" />
+          <img src="assets/sam.jpg" alt="Samuel, your maths and physics tutor" width="108" height="108" decoding="async" loading="lazy" />
           <figcaption class="hero-portrait-cap">Hi, I'm <strong>Samuel</strong> — your tutor</figcaption>
         </figure>
         <div class="stats reveal">
