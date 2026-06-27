@@ -4,19 +4,23 @@
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- Lead tracking (GA4 + Google Ads) ----------
-     Every enquiry fires two destinations:
+     A lead fires two destinations:
 
      1. GA4 (G-BSKJWE0SD5) — a "generate_lead" event sends straight away with
         no setup. In GA4, mark "generate_lead" as a key event
         (Admin > Events) so it counts as a conversion.
      2. Google Ads (AW-18264377431) — needed so Ads can optimise bidding.
-        Create two conversion actions (Goals > Conversions > New > Website),
-        then paste each "Send to" value ("AW-18264377431/xxxxxxxx") below.
+        Create a conversion action (Goals > Conversions > New > Website),
+        then paste its "Send to" value ("AW-18264377431/xxxxxxxx") below.
         Until a real label replaces the placeholder only the GA4 event fires,
-        so no junk Ads data is sent while you're setting it up. */
+        so no junk Ads data is sent while you're setting it up.
+
+     Only the WhatsApp lead is tracked here. The contact-form "enquiry"
+     conversion now fires on its own clean page load in thank-you.html
+     (the form redirects there on success), which is the most reliable
+     way to attribute ad-driven enquiries — so paste that label there. */
   var GA4_ID = "G-BSKJWE0SD5";
   var ADS_CONVERSIONS = {
-    enquiry: "AW-18264377431/REPLACE_WITH_FORM_LABEL",
     whatsapp: "AW-18264377431/REPLACE_WITH_WHATSAPP_LABEL"
   };
   function trackLead(method, adsKey) {
@@ -166,10 +170,10 @@
         body: new FormData(contactForm)
       }).then(function (res) {
         if (!res.ok) throw new Error("Request failed");
-        contactForm.reset();
-        trackLead("contact_form", "enquiry");
-        setStatus("success", "Thanks — your message is on its way. I'll usually reply within a day.");
-        restore();
+        // Success: hand off to the dedicated confirmation page, which fires the
+        // enquiry conversion on a clean page load. We're navigating away, so
+        // there's no need to reset the form or restore the button.
+        window.location.assign("thank-you.html?sent=1");
       }).catch(function () {
         setStatus("error", "Sorry, something went wrong. Please email or message me on WhatsApp instead.");
         restore();
