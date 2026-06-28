@@ -560,6 +560,13 @@ a.card:hover .card-icon { transform: rotate(-6deg) scale(1.08); }
 .article strong { color: var(--text); font-weight: 700; }
 .article a:not(.btn) { color: var(--accent); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
 
+/* Cookie table (cookie-policy.html) */
+.cookie-table-wrap { margin: 0 0 1.2rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.cookie-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; min-width: 520px; }
+.cookie-table th, .cookie-table td { padding: 0.7rem 0.85rem; text-align: left; vertical-align: top; border: 1px solid var(--border); color: var(--text); }
+.cookie-table thead th { background: var(--surface-2); font-weight: 700; border-bottom-color: var(--border-strong); }
+.cookie-table td code { font-size: 0.86rem; }
+
 /* "In this guide" contents box */
 .toc { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem 1.4rem; margin: 0 0 2rem; }
 .toc p { margin: 0 0 0.6rem; font-family: var(--font-sans); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
