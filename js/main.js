@@ -143,6 +143,25 @@
     statObs.observe(statWrap);
   }
 
+  /* ---------- Subject picker: allow multiple, but keep "Not sure yet" exclusive ----------
+     The subjects are now checkboxes so a parent can pick more than one (e.g. a child
+     doing both Maths and Physics, or two siblings). "Not sure yet" only makes sense on
+     its own, so selecting it clears the rest, and picking any real subject clears it. */
+  document.querySelectorAll(".subject-picker").forEach(function (picker) {
+    var boxes = Array.prototype.slice.call(picker.querySelectorAll('input[type="checkbox"]'));
+    var unsure = boxes.filter(function (b) { return b.value === "Not sure yet"; })[0];
+    if (!unsure) return;
+    var others = boxes.filter(function (b) { return b !== unsure; });
+    unsure.addEventListener("change", function () {
+      if (unsure.checked) others.forEach(function (b) { b.checked = false; });
+    });
+    others.forEach(function (b) {
+      b.addEventListener("change", function () {
+        if (b.checked) unsure.checked = false;
+      });
+    });
+  });
+
   /* ---------- Contact form: AJAX submit with graceful fallback ---------- */
   // The submit event only fires once the browser's native validation passes.
   // Without fetch we leave the default POST to FormSubmit in place.
