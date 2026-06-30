@@ -613,3 +613,71 @@ a.card:hover .card-icon { transform: rotate(-6deg) scale(1.08); }
 .callout a { color: var(--accent); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
 .article-related { margin: 2.4rem 0 0; padding-top: 1.4rem; border-top: 1px solid var(--border); font-size: 0.96rem; color: var(--muted); }
 .article-related strong { color: var(--text); }
+
+/* ============================================================
+   UX enhancements
+   ============================================================ */
+
+/* Skip to content — visible only when focused (keyboard / screen readers) */
+.skip-link {
+  position: fixed; top: 0.6rem; left: 0.6rem; z-index: 100;
+  background: var(--ink); color: #fff;
+  padding: 0.7rem 1.1rem; border-radius: var(--radius-sm);
+  font-weight: 700; font-size: 0.95rem;
+  box-shadow: 0 8px 22px rgba(20, 23, 26, .28);
+  transform: translateY(calc(-100% - 1rem));
+  transition: transform .2s var(--ease);
+}
+.skip-link:focus { transform: translateY(0); outline: 2px solid #fff; outline-offset: 2px; }
+main:focus { outline: none; }
+
+/* Current-page indicator in the top nav */
+.nav-links a[aria-current="page"] { color: var(--text); }
+.nav-links a[aria-current="page"]:not(.nav-cta)::after { transform: scaleX(1); opacity: 1; }
+
+/* Revision-guides: subject filter bar (injected by JS) */
+.guide-filter {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;
+  max-width: 760px; margin: 0 auto 1.75rem;
+}
+.guide-filter-btn {
+  font-family: inherit; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+  color: var(--text); background: var(--surface);
+  border: 1.5px solid var(--border-strong); border-radius: 999px;
+  padding: 0.5rem 1rem; line-height: 1;
+  transition: border-color .25s var(--ease), background-color .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
+}
+.guide-filter-btn:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-1px); }
+.guide-filter-btn[aria-pressed="true"] {
+  background: var(--accent); border-color: var(--accent); color: #fff;
+  box-shadow: 0 8px 20px rgba(31, 66, 135, .22);
+}
+.guide-card[hidden] { display: none; }
+
+/* Article pages: reading-progress bar */
+.read-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0;
+  background: var(--grad); z-index: 65;
+  transition: width .1s linear;
+}
+
+/* Long pages: back-to-top button */
+.to-top {
+  position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 60;
+  width: 46px; height: 46px; display: grid; place-items: center;
+  background: var(--ink); color: #fff; border: 0; border-radius: 50%;
+  cursor: pointer; box-shadow: 0 8px 22px rgba(20, 23, 26, .28);
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity .3s var(--ease), transform .3s var(--ease), visibility .3s var(--ease), background .25s var(--ease);
+}
+.to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+.to-top:hover { background: #000; transform: translateY(-2px); }
+.to-top svg { width: 20px; height: 20px; display: block; }
+@media (max-width: 760px) {
+  /* Lift clear of the sticky mobile call-to-action bar */
+  .to-top { right: 1rem; bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .read-progress { transition: none; }
+  .skip-link, .to-top { transition: opacity .15s linear; }
+}

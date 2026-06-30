@@ -48,11 +48,7 @@
   <link rel="manifest" href="site.webmanifest" />
 
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/lora.woff2" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=20260630" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" /></noscript>
+  <link rel="stylesheet" href="css/style.css?v=20260630b" />
 
   <script type="application/ld+json">
   {
@@ -130,6 +126,7 @@
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <!-- Top nav -->
   <header class="nav" id="top">
     <div class="container nav-inner">
@@ -144,7 +141,7 @@
       </a>
       <nav class="nav-links" id="navLinks">
         <a href="index.html#subjects">All subjects</a>
-        <a href="#pricing">Prices</a>
+        <a href="#pricing" aria-current="page">Prices</a>
         <a href="#included">What's included</a>
         <a href="#faq">FAQ</a>
         <a href="revision-guides.html">Guides</a>
@@ -156,7 +153,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <!-- Hero -->
     <section class="hero">
       <div class="hero-glow" aria-hidden="true"></div>
@@ -461,6 +458,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=20260629"></script>
+  <script src="js/main.js?v=20260630b"></script>
 </body>
 </html>

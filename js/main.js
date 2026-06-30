@@ -176,6 +176,13 @@
     };
     contactForm.addEventListener("submit", function (e) {
       e.preventDefault();
+      // Require at least one subject — a checkbox group can't be natively "required".
+      if (!contactForm.querySelector('input[name="subject"]:checked')) {
+        setStatus("error", "Please choose at least one subject so I know what your child needs help with.");
+        var firstBox = contactForm.querySelector('input[name="subject"]');
+        if (firstBox) firstBox.focus();
+        return;
+      }
       var ajaxUrl = contactForm.action.replace("formsubmit.co/", "formsubmit.co/ajax/");
       var defaultLabel = submitBtn ? submitBtn.textContent : "";
       if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Sending…"; }
@@ -218,4 +225,78 @@
     window.addEventListener("resize", syncCta);
     syncCta();
   }
+
+  /* ---------- Revision guides: filter the listing by subject ----------
+     Built from each card's existing tag, so no markup changes are needed and,
+     without JS, every guide simply shows (the correct fallback). */
+  (function () {
+    var grid = document.querySelector(".guide-grid");
+    if (!grid) return;
+    var cards = Array.prototype.slice.call(grid.querySelectorAll(".guide-card"));
+    if (cards.length < 6) return; // only the full listing is worth filtering
+    var subjects = [];
+    cards.forEach(function (card) {
+      var tag = card.querySelector(".guide-tag");
+      var subject = tag ? tag.textContent.trim() : "";
+      card.setAttribute("data-subject", subject);
+      if (subject && subjects.indexOf(subject) === -1) subjects.push(subject);
+    });
+    if (subjects.length < 2) return;
+
+    var bar = document.createElement("div");
+    bar.className = "guide-filter";
+    bar.setAttribute("role", "group");
+    bar.setAttribute("aria-label", "Filter guides by subject");
+    var buttons = [];
+    ["All"].concat(subjects).forEach(function (label) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "guide-filter-btn";
+      btn.textContent = label;
+      btn.setAttribute("aria-pressed", label === "All" ? "true" : "false");
+      btn.addEventListener("click", function () {
+        buttons.forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+        btn.setAttribute("aria-pressed", "true");
+        cards.forEach(function (card) {
+          var show = label === "All" || card.getAttribute("data-subject") === label;
+          card.hidden = !show;
+          if (show) card.classList.add("in"); // don't let reveal-on-scroll leave it invisible
+        });
+      });
+      buttons.push(btn);
+      bar.appendChild(btn);
+    });
+    grid.parentNode.insertBefore(bar, grid);
+  })();
+
+  /* ---------- Article pages: reading-progress bar + back-to-top button ---------- */
+  (function () {
+    if (!document.querySelector(".article")) return;
+
+    var progress = document.createElement("div");
+    progress.className = "read-progress";
+    progress.setAttribute("aria-hidden", "true");
+    document.body.appendChild(progress);
+
+    var toTop = document.createElement("button");
+    toTop.type = "button";
+    toTop.className = "to-top";
+    toTop.setAttribute("aria-label", "Back to top");
+    toTop.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
+    toTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+    });
+    document.body.appendChild(toTop);
+
+    var update = function () {
+      var doc = document.documentElement;
+      var top = window.scrollY || doc.scrollTop;
+      var max = doc.scrollHeight - doc.clientHeight;
+      progress.style.width = (max > 0 ? (top / max) * 100 : 0) + "%";
+      toTop.classList.toggle("show", top > 600);
+    };
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  })();
 })();
